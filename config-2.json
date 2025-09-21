@@ -1,0 +1,24 @@
+{
+  "mcpProxy": {
+    "baseURL": "http://localhost:9090",
+    "addr": ":9090",
+    "name": "MCP Proxy",
+    "version": "1.0.0",
+    "type": "streamable-http"
+  },
+  "mcpServers": {
+    "context7": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp", "--api-key", "YOUR_API_KEY"]
+    },
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-filesystem",
+        "/Users/shyarora/Documents/personal/repos/mcp-proxy"
+      ]
+    }
+  }
+}

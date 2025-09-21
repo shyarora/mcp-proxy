@@ -1,4 +1,4 @@
-package main
+package mcpproxy
 
 import (
 	"crypto/tls"
@@ -128,14 +128,6 @@ type Config struct {
 	McpServers map[string]*MCPClientConfigV2 `json:"mcpServers"`
 }
 
-type FullConfig struct {
-	DeprecatedServerV1  *MCPProxyConfigV1             `json:"server"`
-	DeprecatedClientsV1 map[string]*MCPClientConfigV1 `json:"clients"`
-
-	McpProxy   *MCPProxyConfigV2             `json:"mcpProxy"`
-	McpServers map[string]*MCPClientConfigV2 `json:"mcpServers"`
-}
-
 func newConfProvider(path string, insecure, expandEnv bool, httpHeaders string, httpTimeout int) (provider.Provider, error) {
 	if http.IsRemoteURL(path) {
 		var opts []http.Option
@@ -185,11 +177,10 @@ func load(path string, insecure, expandEnv bool, httpHeaders string, httpTimeout
 	if err != nil {
 		return nil, err
 	}
-	conf, err := confstore.Load[FullConfig](pro, codec.JsonCodec())
+	conf, err := confstore.Load[Config](pro, codec.JsonCodec())
 	if err != nil {
 		return nil, err
 	}
-	adaptMCPClientConfigV1ToV2(conf)
 
 	if conf.McpProxy == nil {
 		return nil, errors.New("mcpProxy is required")
@@ -216,8 +207,5 @@ func load(path string, insecure, expandEnv bool, httpHeaders string, httpTimeout
 		conf.McpProxy.Type = MCPServerTypeSSE // default to SSE
 	}
 
-	return &Config{
-		McpProxy:   conf.McpProxy,
-		McpServers: conf.McpServers,
-	}, nil
+	return conf, nil
 }
