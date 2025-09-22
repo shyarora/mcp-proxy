@@ -7,11 +7,13 @@ GO_BUILD=CGO_ENABLED=0 go build $(LD_FLAGS)
 
 .PHONY: build
 build:
-	$(GO_BUILD) -o $(BUILD_DIR)/ ./...
+	@echo "This is a library-only project. Use 'go get github.com/shyarora/mcp-proxy' to import."
+	go build ./...
 
 .PHONY: buildLinuxX86
 buildLinuxX86:
-	GOOS=linux GOARCH=amd64 $(GO_BUILD) -o $(BUILD_DIR)/ ./...
+	@echo "This is a library-only project. Use 'go get github.com/shyarora/mcp-proxy' to import."
+	GOOS=linux GOARCH=amd64 go build ./...
 
 .PHONY: buildImage
 buildImage:

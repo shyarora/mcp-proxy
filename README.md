@@ -2,7 +2,7 @@
 
 An MCP proxy that aggregates multiple MCP servers behind a single HTTP entrypoint.
 
-**This fork has been enhanced to work both as a standalone CLI application and as a Go library for integration into other projects.**
+**This is a Go library for integration into other projects.**
 
 ## Features
 
@@ -17,28 +17,9 @@ An MCP proxy that aggregates multiple MCP servers behind a single HTTP entrypoin
 - Usage: [docs/usage.md](docs/USAGE.md)
 - Deployment: [docs/deployment.md](docs/DEPLOYMENT.md)
 - **Library Usage**: [LIBRARY_USAGE.md](LIBRARY_USAGE.md)
-- **Integration Guide**: [INTEGRATION_GUIDE.md](INTEGRATION_GUIDE.md)
 - Claude config converter: https://tbxark.github.io/mcp-proxy
 
 ## Quick Start
-
-### As a Standalone CLI
-
-#### Build from source
-
-```bash
-git clone https://github.com/shyarora/mcp-proxy.git
-cd mcp-proxy
-go build .
-./mcp-proxy --config path/to/config.json
-```
-
-#### Install via Go
-
-```bash
-go install github.com/shyarora/mcp-proxy@latest
-mcp-proxy --config path/to/config.json
-```
 
 ### As a Go Library
 
@@ -57,19 +38,7 @@ opts := mcpproxy.ProxyOptions{
 err := mcpproxy.RunProxy(opts)
 ```
 
-See [LIBRARY_USAGE.md](LIBRARY_USAGE.md) for detailed library documentation and [INTEGRATION_GUIDE.md](INTEGRATION_GUIDE.md) for Cobra CLI integration.
-
-### Docker
-
-The image includes support for launching MCP servers via `npx` and `uvx`.
-
-```bash
-docker run -d -p 9090:9090 -v /path/to/config.json:/config/config.json ghcr.io/tbxark/mcp-proxy:latest
-# or provide a remote config
-docker run -d -p 9090:9090 ghcr.io/tbxark/mcp-proxy:latest --config https://example.com/config.json
-```
-
-More deployment options (including docker‑compose) are in [docs/deployment.md](docs/DEPLOYMENT.md).
+See [LIBRARY_USAGE.md](LIBRARY_USAGE.md) for detailed library documentation.
 
 ## Configuration
 
@@ -78,7 +47,7 @@ An online Claude config converter is available at: https://tbxark.github.io/mcp-
 
 ## Usage
 
-Command‑line flags, endpoints, and auth examples are documented in [docs/usage.md](docs/USAGE.md).
+Library usage examples and API documentation are documented in [LIBRARY_USAGE.md](LIBRARY_USAGE.md).
 
 ## Thanks
 
