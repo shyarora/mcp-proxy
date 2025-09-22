@@ -1,4 +1,4 @@
-module github.com/TBXark/mcp-proxy
+module github.com/shyarora/mcp-proxy
 
 go 1.23.0
 
